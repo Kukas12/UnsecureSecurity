@@ -45,6 +45,7 @@ namespace InterfazGrafica {
 	private: System::Windows::Forms::TextBox^ textBox2;
 	private: System::Windows::Forms::Button^ bt_Login;
 	private: System::Windows::Forms::Button^ BtSignUp;
+	private: System::Windows::Forms::Button^ btNoDB;
 
 
 
@@ -71,6 +72,7 @@ namespace InterfazGrafica {
 			this->textBox2 = (gcnew System::Windows::Forms::TextBox());
 			this->bt_Login = (gcnew System::Windows::Forms::Button());
 			this->BtSignUp = (gcnew System::Windows::Forms::Button());
+			this->btNoDB = (gcnew System::Windows::Forms::Button());
 			this->SuspendLayout();
 			// 
 			// label1
@@ -144,12 +146,23 @@ namespace InterfazGrafica {
 			this->BtSignUp->UseVisualStyleBackColor = true;
 			this->BtSignUp->Click += gcnew System::EventHandler(this, &MyForm::button1_Click);
 			// 
+			// btNoDB
+			// 
+			this->btNoDB->Location = System::Drawing::Point(315, 568);
+			this->btNoDB->Name = L"btNoDB";
+			this->btNoDB->Size = System::Drawing::Size(167, 25);
+			this->btNoDB->TabIndex = 7;
+			this->btNoDB->Text = L"Usar sin Base de Datos";
+			this->btNoDB->UseVisualStyleBackColor = true;
+			this->btNoDB->Click += gcnew System::EventHandler(this, &MyForm::btNoDB_Click);
+			// 
 			// MyForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::SystemColors::ActiveCaption;
-			this->ClientSize = System::Drawing::Size(489, 575);
+			this->ClientSize = System::Drawing::Size(489, 603);
+			this->Controls->Add(this->btNoDB);
 			this->Controls->Add(this->BtSignUp);
 			this->Controls->Add(this->bt_Login);
 			this->Controls->Add(this->textBox2);
@@ -158,7 +171,7 @@ namespace InterfazGrafica {
 			this->Controls->Add(this->label2);
 			this->Controls->Add(this->label1);
 			this->Name = L"MyForm";
-			this->Text = L"LoginForm";
+			this->Text = L"SecurePass";
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
@@ -211,5 +224,10 @@ public: Usuario^ usuario = nullptr;
 	  this->cambiarRegistro = true;
 	  this->Close();
   }
+
+    private: System::Void btNoDB_Click(System::Object^ sender, System::EventArgs^ e) {
+		Usuario::BaseDatos = false;
+	    this->Close();
+}
 };
 }

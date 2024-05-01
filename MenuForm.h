@@ -448,7 +448,7 @@ namespace InterfazGrafica {
 			this->Controls->Add(this->bnVerBD);
 			this->Controls->Add(this->btContr);
 			this->Name = L"MenuForm";
-			this->Text = L"Menu";
+			this->Text = L"SecurePass ";
 			this->pnlVercontraseñas->ResumeLayout(false);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->datagv1))->EndInit();
 			this->pnlVerificar->ResumeLayout(false);
@@ -491,67 +491,79 @@ private: System::Void btContr_Click_1(System::Object^ sender, System::EventArgs^
 	this->pnlGenerar->Visible = true;
 	this->pnlVerificar->Visible = false;
 }
-private: System::Void bnVerBD_Click_1(System::Object^ sender, System::EventArgs^ e) {
-	this->pnlVercontraseñas->Visible = true;
-	this->pnlVerificar->Visible = false;
-	this->pnlGenerar->Visible = false;
+	private: System::Void bnVerBD_Click_1(System::Object^ sender, System::EventArgs^ e) {
+		InterfazGrafica::MyForm MyForm;
+		if (Usuario::BaseDatos) {
+			this->pnlVercontraseñas->Visible = true;
+			this->pnlVerificar->Visible = false;
+			this->pnlGenerar->Visible = false;
 
-	String^ conecion = "Data Source=MSI\\SQLEXPRESS;Initial Catalog=BaseDeDatos1;Integrated Security=True";
-	SqlConnection^ sqlConn = gcnew SqlConnection(conecion);
-	sqlConn->Open();
+			String^ conecion = "Data Source=MSI\\SQLEXPRESS;Initial Catalog=BaseDeDatos1;Integrated Security=True";
+			SqlConnection^ sqlConn = gcnew SqlConnection(conecion);
+			sqlConn->Open();
 
-	String^ Query1 = "SELECT CorreoElecServicio AS 'Correo Electronico', ContraseñaServicio AS 'Contraseña', Servicio FROM TableContraseña WHERE ForeingKey=@d";
-	SqlCommand^ command = gcnew SqlCommand(Query1, sqlConn);
-	command->Parameters->AddWithValue("@d", Usuario::id);
+			String^ Query1 = "SELECT CorreoElecServicio AS 'Correo Electronico', ContraseñaServicio AS 'Contraseña', Servicio FROM TableContraseña WHERE ForeingKey=@d";
+			SqlCommand^ command = gcnew SqlCommand(Query1, sqlConn);
+			command->Parameters->AddWithValue("@d", Usuario::id);
 
-	SqlDataAdapter^ adapter = gcnew SqlDataAdapter(command);
+			SqlDataAdapter^ adapter = gcnew SqlDataAdapter(command);
 
-	DataSet^ dataSet = gcnew DataSet();
-
-
-	adapter->Fill(dataSet, "TableData");
+			DataSet^ dataSet = gcnew DataSet();
 
 
-	datagv1->DataSource = dataSet->Tables["TableData"];
+			adapter->Fill(dataSet, "TableData");
 
-	sqlConn->Close();
-}
+
+			datagv1->DataSource = dataSet->Tables["TableData"];
+
+			sqlConn->Close();
+		}
+		else {
+			MessageBox::Show("Esta caracteristica solo funciona con una Base de Datos conectada", "Error", MessageBoxButtons::OK);
+		}
+	}
 private: System::Void btGenerar_Click(System::Object^ sender, System::EventArgs^ e) {
 	this->txbConGenerada->Text = securePass(int(this->longCaracteres->Value));
 }
 private: System::Void btnGuardarServ_Click_1(System::Object^ sender, System::EventArgs^ e) {
-	String^ correoservicio = this->tbGuardarEmail->Text;
-	String^ contraseñaservicio = this->tbGuardarCont->Text;
-	String^ servicio = this->tbGuardarServicio->Text;
-	if (correoservicio->Length == 0 || contraseñaservicio->Length == 0 || servicio->Length == 0) {
-		MessageBox::Show("Asegurese de no dejar ningun campo en blanco antes de guardar su contraseña!", "Error", MessageBoxButtons::OK);
-		return;
+	InterfazGrafica::MyForm MyForm;
+	if (Usuario::BaseDatos) {
+		String^ correoservicio = this->tbGuardarEmail->Text;
+		String^ contraseñaservicio = this->tbGuardarCont->Text;
+		String^ servicio = this->tbGuardarServicio->Text;
+		if (correoservicio->Length == 0 || contraseñaservicio->Length == 0 || servicio->Length == 0) {
+			MessageBox::Show("Asegurese de no dejar ningun campo en blanco antes de guardar su contraseña!", "Error", MessageBoxButtons::OK);
+			return;
+		}
+
+		try {
+
+			String^ conecion = "Data Source=MSI\\SQLEXPRESS;Initial Catalog=BaseDeDatos1;Integrated Security=True";
+			SqlConnection sqlConn(conecion);
+			sqlConn.Open();
+			String^ Query1 = "Insert into TableContraseña values(@a,@b,@c,@d)";
+			SqlCommand comando(Query1, % sqlConn);
+			comando.Parameters->AddWithValue("@a", correoservicio);
+			comando.Parameters->AddWithValue("@b", contraseñaservicio);
+			comando.Parameters->AddWithValue("@c", servicio);
+			comando.Parameters->AddWithValue("@d", Usuario::id);
+
+
+			SqlDataReader^ iniciar = comando.ExecuteReader();
+
+
+			MessageBox::Show("Guardado Correcto", "Done", MessageBoxButtons::OK);
+			this->txbConGenerada->Text = "";
+			this->tbGuardarCont->Text = "";
+			this->tbGuardarEmail->Text = "";
+			this->tbGuardarServicio->Text = "";
+		}
+		catch (Exception^ e) {
+			MessageBox::Show("No se pudo Guardar la contraseña", "Error", MessageBoxButtons::OK);
+		}
 	}
-
-	try {
-
-		String^ conecion = "Data Source=MSI\\SQLEXPRESS;Initial Catalog=BaseDeDatos1;Integrated Security=True";
-		SqlConnection sqlConn(conecion);
-		sqlConn.Open();
-		String^ Query1 = "Insert into TableContraseña values(@a,@b,@c,@d)";
-		SqlCommand command(Query1, % sqlConn);
-		command.Parameters->AddWithValue("@a", correoservicio);
-		command.Parameters->AddWithValue("@b", contraseñaservicio);
-		command.Parameters->AddWithValue("@c", servicio);
-		command.Parameters->AddWithValue("@d", Usuario::id);
-
-
-		SqlDataReader^ iniciar = command.ExecuteReader();
-
-
-		MessageBox::Show("Guardado Correcto", "Done", MessageBoxButtons::OK);
-		this->txbConGenerada->Text = "";
-		this->tbGuardarCont->Text = "";
-		this->tbGuardarEmail->Text = "";
-		this->tbGuardarServicio->Text = "";
-	}
-	catch (Exception^ e) {
-		MessageBox::Show("No se pudo Guardar la contraseña", "Error", MessageBoxButtons::OK);
+	else {
+		MessageBox::Show("Esta caracteristica solo funciona con una Base de Datos conectada", "Error", MessageBoxButtons::OK);
 	}
 }
 };

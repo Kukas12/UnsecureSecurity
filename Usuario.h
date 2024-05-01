@@ -10,4 +10,5 @@ public:
 	String^ CorreoElectronico;
 	String^ Contraseña;
 	String^ Telefono;
+	static bool BaseDatos = true;
 };

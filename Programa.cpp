@@ -2,19 +2,42 @@
 #include "RegisterForm.h"
 #include "MenuForm.h"
 #include "Usuario.h"
+#include <iostream>
+#include <fstream>
+#include<chrono>
+#include<ctime>
 
 
 using namespace System::Windows::Forms;
+using namespace std;
 
+void registro() {
+	Usuario^ usuario = nullptr;
+	auto reloj = chrono::system_clock::now();
+	time_t horaActual = chrono::system_clock::to_time_t(reloj);
+	ofstream MyFile("Acesso.txt", std::ios::app);
+	MyFile << "Accedió al sistema el usuario " << usuario->id << " en " << ctime(&horaActual);
+	MyFile.close();
+}
 
+void Despedida() {
+	bool conectado = true;
+	if (conectado) {
+		MessageBox::Show("Adios!", "SecurePass", MessageBoxButtons::OK);
+	}
+}
 
 int main() {
+
+
 	srand(time(NULL));
 	Application::EnableVisualStyles();
 	Application::SetCompatibleTextRenderingDefault(false);
 	InterfazGrafica::MyForm  MyForm;
 
 	Usuario^ usuario = nullptr;
+    
+
 
 
 	while (true) {
@@ -42,16 +65,22 @@ int main() {
 			   usuario = MyForm.usuario;
 			   break;
 		}
-	}
 
-	if (usuario != nullptr) {
+	}
+	if (usuario != nullptr || Usuario::BaseDatos==false) {
 		Usuario::id = usuario->id;
-		MessageBox::Show("Iniciastes Seccion con " + usuario->Nombre, "SecurePass", MessageBoxButtons::OK);
-		InterfazGrafica::MenuForm MenuForm;
-		MenuForm.ShowDialog();
-		bool conectado = true;
-		if (conectado) {
-			MessageBox::Show("Adios!", "SecurePass", MessageBoxButtons::OK);
+	
+		if (Usuario::BaseDatos) {
+			MessageBox::Show("Iniciastes Seccion con " + usuario->Nombre, "SecurePass", MessageBoxButtons::OK);
+			registro();
+			InterfazGrafica::MenuForm MenuForm;
+			MenuForm.ShowDialog();
+			Despedida();
+		}
+		else{ 
+			InterfazGrafica::MenuForm MenuForm;
+			MenuForm.ShowDialog();
+			Despedida();
 		}
 	}
 	else {
