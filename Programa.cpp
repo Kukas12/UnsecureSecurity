@@ -11,6 +11,7 @@
 using namespace System::Windows::Forms;
 using namespace std;
 
+
 void registro() {
 	Usuario^ usuario = nullptr;
 	auto reloj = chrono::system_clock::now();
@@ -33,19 +34,20 @@ int main() {
 	srand(time(NULL));
 	Application::EnableVisualStyles();
 	Application::SetCompatibleTextRenderingDefault(false);
-	InterfazGrafica::MyForm  MyForm;
 
+	InterfazGrafica::MyForm  MyForm;
+	InterfazGrafica::MenuForm MenuForm;
+	InterfazGrafica::MyForm1 MyForm1;
 	Usuario^ usuario = nullptr;
     
 
 
 
 	while (true) {
-		InterfazGrafica::MyForm MyForm;
+		MyForm.cambiarRegistro = false;
 		MyForm.ShowDialog();
 
 		if (MyForm.cambiarRegistro) {
-			InterfazGrafica::MyForm1 MyForm1;
 			MyForm1.ShowDialog();
 			
 			if (MyForm1.cambiarLogin) {
@@ -59,11 +61,15 @@ int main() {
 
 
 		}
+		else {
+			usuario = MyForm.usuario;
+
+			break;
+		}
 		
-		InterfazGrafica::MyForm1 MyForm1;
-		   if (MyForm1.cambiarLogin == false) {
-			   usuario = MyForm.usuario;
-			   break;
+		if (MyForm1.cambiarLogin == false) {
+			usuario = MyForm.usuario;
+			break;
 		}
 
 	}
@@ -73,12 +79,11 @@ int main() {
 		if (Usuario::BaseDatos) {
 			MessageBox::Show("Iniciastes Seccion con " + usuario->Nombre, "SecurePass", MessageBoxButtons::OK);
 			registro();
-			InterfazGrafica::MenuForm MenuForm;
 			MenuForm.ShowDialog();
 			Despedida();
 		}
 		else{ 
-			InterfazGrafica::MenuForm MenuForm;
+			
 			MenuForm.ShowDialog();
 			Despedida();
 		}

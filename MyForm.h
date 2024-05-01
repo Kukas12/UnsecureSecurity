@@ -80,11 +80,11 @@ namespace InterfazGrafica {
 			this->label1->AutoSize = true;
 			this->label1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 21.75F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->label1->Location = System::Drawing::Point(187, 58);
+			this->label1->Location = System::Drawing::Point(141, 66);
 			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(86, 33);
+			this->label1->Size = System::Drawing::Size(191, 33);
 			this->label1->TabIndex = 0;
-			this->label1->Text = L"Login";
+			this->label1->Text = L"Iniciar Sesión";
 			// 
 			// label2
 			// 
@@ -110,6 +110,7 @@ namespace InterfazGrafica {
 			// 
 			// textBox1
 			// 
+			this->textBox1->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
 			this->textBox1->Location = System::Drawing::Point(33, 227);
 			this->textBox1->Name = L"textBox1";
 			this->textBox1->Size = System::Drawing::Size(380, 20);
@@ -117,6 +118,7 @@ namespace InterfazGrafica {
 			// 
 			// textBox2
 			// 
+			this->textBox2->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
 			this->textBox2->Location = System::Drawing::Point(33, 312);
 			this->textBox2->Name = L"textBox2";
 			this->textBox2->Size = System::Drawing::Size(379, 20);
@@ -130,7 +132,7 @@ namespace InterfazGrafica {
 			this->bt_Login->Name = L"bt_Login";
 			this->bt_Login->Size = System::Drawing::Size(246, 65);
 			this->bt_Login->TabIndex = 5;
-			this->bt_Login->Text = L"Log In";
+			this->bt_Login->Text = L"Conectarte";
 			this->bt_Login->UseVisualStyleBackColor = true;
 			this->bt_Login->Click += gcnew System::EventHandler(this, &MyForm::bt_Login_Click);
 			// 
@@ -142,7 +144,7 @@ namespace InterfazGrafica {
 			this->BtSignUp->Name = L"BtSignUp";
 			this->BtSignUp->Size = System::Drawing::Size(245, 70);
 			this->BtSignUp->TabIndex = 6;
-			this->BtSignUp->Text = L"Sign Up";
+			this->BtSignUp->Text = L"Crear Cuenta";
 			this->BtSignUp->UseVisualStyleBackColor = true;
 			this->BtSignUp->Click += gcnew System::EventHandler(this, &MyForm::button1_Click);
 			// 
@@ -170,8 +172,9 @@ namespace InterfazGrafica {
 			this->Controls->Add(this->label3);
 			this->Controls->Add(this->label2);
 			this->Controls->Add(this->label1);
+			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedToolWindow;
 			this->Name = L"MyForm";
-			this->Text = L"SecurePass";
+			this->Text = L"SecurePass Beta";
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
@@ -188,15 +191,15 @@ public: Usuario^ usuario = nullptr;
 			return;
 		}
 			try {
-				String^ conecion = "Data Source=MSI\\SQLEXPRESS;Initial Catalog=BaseDeDatos1;Integrated Security=True";
-				SqlConnection sqlConn(conecion);
+				String^ conexion = "Data Source=MSI\\SQLEXPRESS;Initial Catalog=BaseDeDatos1;Integrated Security=True";
+				SqlConnection sqlConn(conexion);
 				sqlConn.Open();
-				String^ Query = "Select * from TablaUsuarios where CorreoElectronico=@email and Contraseña=@Password";
-				SqlCommand command(Query, % sqlConn);
-				command.Parameters->AddWithValue("@email", correo);
-				command.Parameters->AddWithValue("@Password", contraseña);
+				String^ Query = "Select * from Usuarios where CorreoElectronico=@email and Contraseña=@Password";
+				SqlCommand comando(Query, % sqlConn);
+				comando.Parameters->AddWithValue("@email", correo);
+				comando.Parameters->AddWithValue("@Password", contraseña);
 
-				SqlDataReader^ iniciar = command.ExecuteReader();
+				SqlDataReader^ iniciar = comando.ExecuteReader();
 				if (iniciar->Read()) {
 					usuario = gcnew Usuario;
 					usuario->id = iniciar->GetInt32(0);
@@ -204,7 +207,6 @@ public: Usuario^ usuario = nullptr;
 					usuario->Apellido = iniciar->GetString(2);
 					usuario->CorreoElectronico = iniciar->GetString(3);
 					usuario->Contraseña = iniciar->GetString(4);
-					usuario->Telefono = iniciar->GetString(5);
 					this->Close();
 
 
