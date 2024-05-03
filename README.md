@@ -2,7 +2,7 @@
 Generador de Contraseñas con integracion de una base de datos(Opcional)
 
 ## Antes de Usar
-De querer utilizar el programa en su totalidad, debe tener una base de datos creada en Microsoft SQL con al menos 2 tablas. Una tabla debe almacenar los usuarios y otra tabla las contraseñas. Debe conectar ambas tablas utilizando un Foreign Key
+Para utilizar el programa en su totalidad, debe tener una base de datos creada en Microsoft SQL con al menos 2 tablas y conectarla al codigo. Una tabla debe almacenar los usuarios y otra tabla las contraseñas. Debe conectar ambas tablas utilizando un Foreign Key
 
 La tabla del usuario debe tener:
 ID(INT IDENTITY 1,1), Nombre(varchar(15)), Apellidos(varchar(50)), CorreoElectronico(varchar(50)) y Contraseña(varchar(max))
