@@ -2,6 +2,8 @@
 
 using namespace System;
 
+//Variables publicas para manejar dentro de todo el codigo
+
 public ref class Usuario {
 public:
 	static int id;

@@ -17,15 +17,11 @@ namespace InterfazGrafica {
 		MyForm1(void)
 		{
 			InitializeComponent();
-			//
-			//TODO: Add the constructor code here
-			//
+		//Se utiliza en Programa.cpp
 		}
 
 	protected:
-		/// <summary>
-		/// Clean up any resources being used.
-		/// </summary>
+	//Libera espacio
 		~MyForm1()
 		{
 			if (components)
@@ -66,9 +62,9 @@ namespace InterfazGrafica {
 
 #pragma region Windows Form Designer generated code
 		/// <summary>
-		/// Required method for Designer support - do not modify
-		/// the contents of this method with the code editor.
+        // AQUI SE ENCUENTRA CADA ELEMENTO DE LA INTERFAZ GRAFICA. NO MODIFICAR!!!!!!!!!!
 		/// </summary>
+		//YAHIR QUILES
 		void InitializeComponent(void)
 		{
 			this->label1 = (gcnew System::Windows::Forms::Label());
@@ -224,6 +220,10 @@ namespace InterfazGrafica {
 			this->PerformLayout();
 
 		}
+
+		//Aqui abajo estan las funciones de cada boton en la interfaz de registro
+		//Los botones en blanco no afectan en nada
+		//JOSE CENTENO
 #pragma endregion
 	public: bool cambiarLogin = false;
 	private: System::Void textBox1_TextChanged(System::Object^ sender, System::EventArgs^ e) {
@@ -238,7 +238,7 @@ namespace InterfazGrafica {
 		this->Close();
 	}
 	private: System::Void BtConfirm_Click(System::Object^ sender, System::EventArgs^ e) {
-		//confirm
+		//Se ejecuta un Querry que te añade a la base de datos
 		String^ nombre = this->tbNombre->Text;
 		String^ apellidos = this->tbApellidos->Text;
 		String^ correo = this->tbCorreo2->Text;

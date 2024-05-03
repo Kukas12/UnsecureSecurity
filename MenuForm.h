@@ -4,9 +4,13 @@
 #include <locale>
 using namespace std;
 
+//Funcion que verifica cuan segura es una contraseña
+//YAHIR QUILES
 int verificar(int largo, string contraseña) {
 	int NumSeg=0;
 	bool signo = false, mayus = false, minus = false, numero = false, repetida=true;
+
+	//Detecta mayusculas y minusculas
 	for (char letra : contraseña) {
 
 		if (isupper(letra)) {
@@ -23,7 +27,7 @@ int verificar(int largo, string contraseña) {
 		NumSeg += 1;
 	}
 
-
+	//Detecta los caracteres especiales
 	char arr[]{ 35,36,37,38,39,40,41,42,43,44,45,46,47 };
 	for (int i = 0; i < contraseña.length()	; i++) {
 		for (int y = 0; y < 13; y++) {
@@ -36,6 +40,7 @@ int verificar(int largo, string contraseña) {
 		NumSeg += 1;
 	}
 
+	//Detecta numeros
 	char arr2[]{ '1','2','3','4','5','6','7','8','9','0'};
 	for (int i = 0; i < contraseña.length(); i++) {
 		for (int y = 0; y < 10; y++) {
@@ -48,10 +53,12 @@ int verificar(int largo, string contraseña) {
 		NumSeg += 1;
 	}
 
+	//Se asegura que la contraseña tenga mas de 12 caracteres
 	if (contraseña.length() >= 12) {
 		NumSeg += 1;
 	}
 
+	//Se asegura que la contraseña no sea un solo caracter
 	for (int i = 0; i < contraseña.length(); i++) {
 		if (contraseña[0] != contraseña[i]) {
 			repetida = false;
@@ -71,21 +78,25 @@ int verificar(int largo, string contraseña) {
 
 
 
-
+//Funcion que genera la contraseña
 String^ securePass(int cantidad) {
 	String^ contraseña;
+	//Reserva espacio en la memoria para asi poder crear un arreglo del tamaño de una variable tipo INT
 	char* letras = new char[(cantidad+1)];
 	for (int i = 0; i < cantidad; i++) {
 		letras[i] = 35 + rand() % (126 - 35);
 	}
+	// el '0' se asegura de asignarle un cierre al arreglo
 	letras[cantidad] = '\0';
+	//Une el arreglo y lo añade a una variable tipo string
 	contraseña = gcnew String(letras);
+	//Elimina el espacio que ocupa en la RAM
 	delete[] letras;
 	return contraseña;
 }
 
 
-
+//YAHIR QUILES Y JOSE CENTENO
 namespace InterfazGrafica {
 	
 	using namespace System;
@@ -96,18 +107,14 @@ namespace InterfazGrafica {
 	using namespace System::Drawing;
 	using namespace System::Data::SqlClient;
 
-	/// <summary>
-	/// Summary for MenuForm
-	/// </summary>
+
 	public ref class MenuForm : public System::Windows::Forms::Form
 	{
 	public:
 		MenuForm(void)
 		{
 			InitializeComponent();
-			//
-			//TODO: Add the constructor code here
-			//
+
 		}
 
 	protected:
@@ -181,6 +188,7 @@ namespace InterfazGrafica {
 	private: System::Windows::Forms::Label^ label19;
 	private: System::Windows::Forms::Label^ label18;
 	private: System::Windows::Forms::Label^ label24;
+	private: System::Windows::Forms::Label^ label25;
 
 
 
@@ -193,15 +201,12 @@ namespace InterfazGrafica {
 	protected:
 
 	private:
-		/// <summary>
-		/// Required designer variable.
-		/// </summary>
+
 		System::ComponentModel::Container ^components;
 
 #pragma region Windows Form Designer generated code
 		/// <summary>
-		/// Required method for Designer support - do not modify
-		/// the contents of this method with the code editor.
+        // NO MODIFICAR!!!!!!!!!!!!!!!!!!!!!
 		/// </summary>
 		void InitializeComponent(void)
 		{
@@ -215,6 +220,7 @@ namespace InterfazGrafica {
 			this->label4 = (gcnew System::Windows::Forms::Label());
 			this->datagv1 = (gcnew System::Windows::Forms::DataGridView());
 			this->pnlVerificar = (gcnew System::Windows::Forms::Panel());
+			this->label25 = (gcnew System::Windows::Forms::Label());
 			this->label23 = (gcnew System::Windows::Forms::Label());
 			this->label22 = (gcnew System::Windows::Forms::Label());
 			this->label21 = (gcnew System::Windows::Forms::Label());
@@ -296,7 +302,7 @@ namespace InterfazGrafica {
 			this->label1->AutoSize = true;
 			this->label1->Font = (gcnew System::Drawing::Font(L"Russo One", 24, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->label1->Location = System::Drawing::Point(4, 11);
+			this->label1->Location = System::Drawing::Point(24, 19);
 			this->label1->Name = L"label1";
 			this->label1->Size = System::Drawing::Size(589, 39);
 			this->label1->TabIndex = 5;
@@ -353,6 +359,7 @@ namespace InterfazGrafica {
 			// pnlVerificar
 			// 
 			this->pnlVerificar->BackColor = System::Drawing::Color::Transparent;
+			this->pnlVerificar->Controls->Add(this->label25);
 			this->pnlVerificar->Controls->Add(this->label23);
 			this->pnlVerificar->Controls->Add(this->label22);
 			this->pnlVerificar->Controls->Add(this->label21);
@@ -370,6 +377,17 @@ namespace InterfazGrafica {
 			this->pnlVerificar->Size = System::Drawing::Size(751, 625);
 			this->pnlVerificar->TabIndex = 8;
 			this->pnlVerificar->Visible = false;
+			// 
+			// label25
+			// 
+			this->label25->AutoSize = true;
+			this->label25->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 15.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->label25->Location = System::Drawing::Point(57, 556);
+			this->label25->Name = L"label25";
+			this->label25->Size = System::Drawing::Size(305, 25);
+			this->label25->TabIndex = 12;
+			this->label25->Text = L"5 - Extremadamente Segura";
 			// 
 			// label23
 			// 
@@ -389,9 +407,9 @@ namespace InterfazGrafica {
 				static_cast<System::Byte>(0)));
 			this->label22->Location = System::Drawing::Point(57, 525);
 			this->label22->Name = L"label22";
-			this->label22->Size = System::Drawing::Size(305, 25);
+			this->label22->Size = System::Drawing::Size(173, 25);
 			this->label22->TabIndex = 10;
-			this->label22->Text = L"4 - Extremadamente Segura";
+			this->label22->Text = L"4 - Muy Segura";
 			// 
 			// label21
 			// 
@@ -400,20 +418,20 @@ namespace InterfazGrafica {
 				static_cast<System::Byte>(0)));
 			this->label21->Location = System::Drawing::Point(57, 491);
 			this->label21->Name = L"label21";
-			this->label21->Size = System::Drawing::Size(173, 25);
+			this->label21->Size = System::Drawing::Size(122, 25);
 			this->label21->TabIndex = 9;
-			this->label21->Text = L"3 - Muy Segura";
+			this->label21->Text = L"3 - Segura";
 			// 
 			// label20
 			// 
 			this->label20->AutoSize = true;
 			this->label20->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 15.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->label20->Location = System::Drawing::Point(57, 455);
+			this->label20->Location = System::Drawing::Point(57, 458);
 			this->label20->Name = L"label20";
-			this->label20->Size = System::Drawing::Size(122, 25);
+			this->label20->Size = System::Drawing::Size(152, 25);
 			this->label20->TabIndex = 8;
-			this->label20->Text = L"2 - Segura";
+			this->label20->Text = L"2 - Aceptable";
 			// 
 			// label19
 			// 
@@ -807,6 +825,7 @@ namespace InterfazGrafica {
 			this->PerformLayout();
 
 		}
+		//JOSE CENTENO
 #pragma endregion
 	private: System::Void hScrollBar1_Scroll(System::Object^ sender, System::Windows::Forms::ScrollEventArgs^ e) {
 	}
@@ -822,12 +841,12 @@ namespace InterfazGrafica {
 		this->pnlGenerar->Visible = false;
 	}
   
-    private: System::Void longCaracteres_ValueChanged(System::Object^ sender, System::EventArgs^ e) {
+private: System::Void longCaracteres_ValueChanged(System::Object^ sender, System::EventArgs^ e) {
 	
-    }
-    private: System::Void btnCopiar_Click(System::Object^ sender, System::EventArgs^ e) {
+}
+private: System::Void btnCopiar_Click(System::Object^ sender, System::EventArgs^ e) {
 		this->txbConGenerada->Copy();
-    }
+}
 
 private: System::Void label6_Click(System::Object^ sender, System::EventArgs^ e) {
 }
@@ -841,7 +860,7 @@ private: System::Void btContr_Click_1(System::Object^ sender, System::EventArgs^
 	this->pnlGenerar->Visible = true;
 	this->pnlVerificar->Visible = false;
 }
-	private: System::Void bnVerBD_Click_1(System::Object^ sender, System::EventArgs^ e) {
+private: System::Void bnVerBD_Click_1(System::Object^ sender, System::EventArgs^ e) {
 		
 		InterfazGrafica::MyForm MyForm;
 		if (Usuario::BaseDatos) {
@@ -854,10 +873,11 @@ private: System::Void btContr_Click_1(System::Object^ sender, System::EventArgs^
 			SqlConnection^ sqlConn = gcnew SqlConnection(conecion);
 			sqlConn->Open();
 
-			String^ Query1 = "Select CorreoElecServicio AS 'Correo Electronico', ContraseñaServicio AS 'Contraseña', Servicio FROM TableContraseña WHERE ForeingKey=@d";
+			String^ Query1 = "Select CorreoElecServicio AS 'Correo Electronico', ContraseñaServicio AS 'Contraseña', Servicio FROM TableContraseña WHERE UsuarioID=@d";
 			SqlCommand^ command = gcnew SqlCommand(Query1, sqlConn);
 			command->Parameters->AddWithValue("@d", Usuario::id);
 
+			//Se obtiene la tabla de MSSQL
 			SqlDataAdapter^ adapter = gcnew SqlDataAdapter(command);
 
 			DataSet^ dataSet = gcnew DataSet();
@@ -933,13 +953,17 @@ private: System::Void BtnVerificar_Click(System::Object^ sender, System::EventAr
 	}
 	int seguridad;
 
-	//https://stackoverflow.com/questions/946813/c-cli-converting-from-systemstring-to-stdstring/946841#946841
+
+	//Ben Schwehn 2009, C++/CLI Converting from System::String^ to std::string, Recuperado desde: https://stackoverflow.com/questions/946813/c-cli-converting-from-systemstring-to-stdstring/946841#946841
 
 	char cStr[50] = { 0 };
 	if (contraseña->Length < sizeof(cStr))
 		sprintf(cStr, "%s", contraseña);
 	std::string contraseña2(cStr);
 	int largo = contraseña->Length;
+
+	// Aqui termina el codigo de Ben
+
 
 	seguridad=verificar(largo, contraseña2);
 	if (contraseña2.length() < 6) {

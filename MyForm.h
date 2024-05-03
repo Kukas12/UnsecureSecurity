@@ -59,10 +59,7 @@ namespace InterfazGrafica {
 		System::ComponentModel::Container^ components;
 
 #pragma region Windows Form Designer generated code
-		/// <summary>
-		/// Required method for Designer support - do not modify
-		/// the contents of this method with the code editor.
-		/// </summary>
+        //YAHIR QUILES
 		void InitializeComponent(void)
 		{
 			this->label1 = (gcnew System::Windows::Forms::Label());
@@ -180,7 +177,7 @@ namespace InterfazGrafica {
 
 		}
 #pragma endregion
-
+		//JOSE CENTENO
 public: Usuario^ usuario = nullptr;
 	private: System::Void bt_Login_Click(System::Object^ sender, System::EventArgs^ e) {
 		String^ correo = this->textBox1->Text;
