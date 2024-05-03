@@ -1,4 +1,4 @@
-# SecurePass
+# SecurePass v1.0
 Generador de Contraseñas con integracion de una base de datos(Opcional)
 
 ## Antes de Usar
