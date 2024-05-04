@@ -15,7 +15,7 @@ CorreoElectronicoServ(varchar(max)), ContraseñaServicio(varchar(max)), Servicio
 Luego dentro del Código de cada interfaz, cambie los querys con los nombres de sus tablas y el enlace de conexión por el de su Base de Datos añadiendo un '\' al enlace.
 Si no quiere usar una base de datos, el programa tiene un modo para utilizarlo sin necesidad de alguna Base de Datos. Pero dicho modo tiene funciones limitadas.
 
-## Como Usar
+## Como Usar el Programa
 1. Al abrir el programa, inicie sesión o cree una cuenta. Si no, utiliza el modo sin base de datos.
 2. Cuando inicie sesión podrá elegir entre las opciones que el programa les ofrezca. Las opciones se mostrarán abajo.
    
