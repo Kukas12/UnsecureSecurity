@@ -13,7 +13,7 @@ La tabla de las contraseñas debe tener:
 CorreoElectronicoServ(varchar(max)), ContraseñaServicio(varchar(max)), Servicio(varchar(max)) y UsuarioID(INT, Foreign Key)
 
 Luego dentro del Código de cada interfaz, cambie los querys con los nombres de sus tablas y el enlace de conexión por el de su Base de Datos añadiendo un '\' al enlace.
-Si no quiere usar una base de datos, puede utilizar el programa Sin Base de Datos para ver cómo funciona el generador y verificador de contraseñas.
+Si no quiere usar una base de datos, el programa tiene un modo para utilizarlo sin necesidad de alguna Base de Datos. Pero dicho modo tiene funciones limitadas.
 
 ## Como Usar
 1. Al abrir el programa, inicie sesión o cree una cuenta. Si no, utiliza el modo sin base de datos.
