@@ -28,7 +28,7 @@ Si no quiere usar una base de datos, puede utilizar el programa Sin Base de Dato
 
 ## Versiones 
 v0.8
-El Programa SecurePass es lanzado al publico
+El Programa SecurePass es lanzado al publico\n
 Funciones principales funcionales
 
 ## Licencia
