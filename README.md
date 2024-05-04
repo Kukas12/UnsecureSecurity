@@ -29,7 +29,8 @@ Si no quiere usar una base de datos, puede utilizar el programa Sin Base de Dato
 ***SI NO TIENES BASE DE DATOS, LA OPCION DE GUARDAR CONTRASEÑA Y VER CONTRASEÑA NO ESTARAN DISPONIBLES***
 
 ## Versiones 
-v0.8
+*v0.8*
+
 El Programa SecurePass es lanzado al publico
 
 Funciones principales funcionales
