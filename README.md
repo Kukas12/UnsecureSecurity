@@ -1,4 +1,4 @@
-# SecurePass v1.0
+# SecurePass Beta
 Generador de Contraseñas con integracion de una base de datos(Opcional)
 
 ## Antes de Usar
@@ -26,9 +26,14 @@ Si no quiere usar una base de datos, puede utilizar el programa Sin Base de Dato
 
 ***SI NO TIENES BASE DE DATOS, LA OPCION DE GUARDAR CONTRASEÑA Y VER CONTRASEÑA NO ESTARAN DISPONIBLES***
 
+## Versiones 
+v0.8
+--El Programa SecurePass es lanzado al publico
+--Funciones principales funcionales
+
 ## Licencia
-                     GNU GENERAL PUBLIC LICENSE
-                       Version 3, 29 June 2007
+GNU GENERAL PUBLIC LICENSE
+Version 3, 29 June 2007
 
  Copyright (C) 2007 Free Software Foundation, Inc. https://fsf.org/
  Everyone is permitted to copy and distribute verbatim copies
