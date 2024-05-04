@@ -28,9 +28,9 @@ int verificar(int largo, string contraseña) {
 	}
 
 	//Detecta los caracteres especiales
-	char arr[]{ 35,36,37,38,39,40,41,42,43,44,45,46,47 };
+	char arr[]{ 35,36,37,38,39,40,41,42,43,44,45,46,47,58,59,60,61,62,63,64 };
 	for (int i = 0; i < contraseña.length()	; i++) {
-		for (int y = 0; y < 13; y++) {
+		for (int y = 0; y < 20; y++) {
 			if (contraseña[i] == arr[y]) {
 				signo = true;
 			}
@@ -80,6 +80,7 @@ int verificar(int largo, string contraseña) {
 
 //Funcion que genera la contraseña
 String^ securePass(int cantidad) {
+	//String^ CLR
 	String^ contraseña;
 	//Reserva espacio en la memoria para asi poder crear un arreglo del tamaño de una variable tipo INT
 	char* letras = new char[(cantidad+1)];
@@ -188,7 +189,7 @@ namespace InterfazGrafica {
 	private: System::Windows::Forms::Label^ label19;
 	private: System::Windows::Forms::Label^ label18;
 	private: System::Windows::Forms::Label^ label24;
-	private: System::Windows::Forms::Label^ label25;
+
 
 
 
@@ -220,7 +221,6 @@ namespace InterfazGrafica {
 			this->label4 = (gcnew System::Windows::Forms::Label());
 			this->datagv1 = (gcnew System::Windows::Forms::DataGridView());
 			this->pnlVerificar = (gcnew System::Windows::Forms::Panel());
-			this->label25 = (gcnew System::Windows::Forms::Label());
 			this->label23 = (gcnew System::Windows::Forms::Label());
 			this->label22 = (gcnew System::Windows::Forms::Label());
 			this->label21 = (gcnew System::Windows::Forms::Label());
@@ -271,7 +271,7 @@ namespace InterfazGrafica {
 			this->btContr->Name = L"btContr";
 			this->btContr->Size = System::Drawing::Size(155, 77);
 			this->btContr->TabIndex = 1;
-			this->btContr->Text = L"Generar Contraseña";
+			this->btContr->Text = L"Generar o Guardar Contraseña";
 			this->btContr->UseVisualStyleBackColor = true;
 			this->btContr->Click += gcnew System::EventHandler(this, &MenuForm::btContr_Click_1);
 			// 
@@ -359,7 +359,6 @@ namespace InterfazGrafica {
 			// pnlVerificar
 			// 
 			this->pnlVerificar->BackColor = System::Drawing::Color::Transparent;
-			this->pnlVerificar->Controls->Add(this->label25);
 			this->pnlVerificar->Controls->Add(this->label23);
 			this->pnlVerificar->Controls->Add(this->label22);
 			this->pnlVerificar->Controls->Add(this->label21);
@@ -377,17 +376,6 @@ namespace InterfazGrafica {
 			this->pnlVerificar->Size = System::Drawing::Size(751, 625);
 			this->pnlVerificar->TabIndex = 8;
 			this->pnlVerificar->Visible = false;
-			// 
-			// label25
-			// 
-			this->label25->AutoSize = true;
-			this->label25->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 15.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			this->label25->Location = System::Drawing::Point(57, 556);
-			this->label25->Name = L"label25";
-			this->label25->Size = System::Drawing::Size(305, 25);
-			this->label25->TabIndex = 12;
-			this->label25->Text = L"5 - Extremadamente Segura";
 			// 
 			// label23
 			// 
@@ -955,6 +943,8 @@ private: System::Void BtnVerificar_Click(System::Object^ sender, System::EventAr
 
 
 	//Ben Schwehn 2009, C++/CLI Converting from System::String^ to std::string, Recuperado desde: https://stackoverflow.com/questions/946813/c-cli-converting-from-systemstring-to-stdstring/946841#946841
+
+	//String^ (cadena CLR - Common Language Runtime) a string regular
 
 	char cStr[50] = { 0 };
 	if (contraseña->Length < sizeof(cStr))
