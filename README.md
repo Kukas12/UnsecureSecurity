@@ -4,7 +4,7 @@ Generador de Contraseñas con integración de una base de datos(Opcional)
 ## Antes de Usar
 Para utilizar el programa en su totalidad, tiene que instalar el soporte de C++/CLI y también el .NET Desktop Development en el Visual Studio Instaler y debe tener una base de datos creada en Microsoft SQL con al menos 2 tablas y conectarla al código. Una tabla debe almacenar los usuarios registrados y otra tabla las contraseñas almacenadas. Debe relacionar ambas tablas utilizando un Foreign Key.
 
-***Enlace a youtube que lo explica: https://www.youtube.com/watch?v=uOwMpb-IWhU&t=31s (Los primeros 2 minutos)***
+***Enlace a youtube que lo explica: https://www.youtube.com/watch?v=uOwMpb-IWhU&t=31s (Los primeros 2 minutos). Para usar el modo "Sin Base De Datos", no hace falta configurar las tablas en Microsoft SQL***
 
 La tabla del usuario debe tener:
 
