@@ -2,7 +2,7 @@
 Generador de Contraseñas con integración de una base de datos(Opcional)
 
 ## Antes de Usar
-Para utilizar el programa en su totalidad, tiene que instalar el soporte de C++/CLI, tiene que instalar el .NET Desktop Development en el Visual Studio Instaler y debe tener una base de datos creada en Microsoft SQL con al menos 2 tablas y conectarla al código. Una tabla debe almacenar los usuarios registrados y otra tabla las contraseñas almacenadas. Debe relacionar ambas tablas utilizando un Foreign Key.
+Para utilizar el programa en su totalidad, tiene que instalar el soporte de C++/CLI y también el .NET Desktop Development en el Visual Studio Instaler y debe tener una base de datos creada en Microsoft SQL con al menos 2 tablas y conectarla al código. Una tabla debe almacenar los usuarios registrados y otra tabla las contraseñas almacenadas. Debe relacionar ambas tablas utilizando un Foreign Key.
 
 La tabla del usuario debe tener:
 
